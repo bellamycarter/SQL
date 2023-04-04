@@ -1,0 +1,21 @@
+create table flower_shop (id integer primary key, flower text, color text, quantity integer, price integer, blooming_season text);
+
+insert into flower_shop values (1, "rose", "red", 11, 35, "late spring to early fall");
+insert into flower_shop values (2, "lily", "red", 24, 32, "early summer to end of fall");
+insert into flower_shop values (3, "tulip", "red", 11, 43, "spring");
+insert into flower_shop values (4, "carnation", "pink", 40, 30, "late spring");
+insert into flower_shop values (5, "daffodil", "yellow", 34, 33, "late winter to early spring");
+insert into flower_shop values (6, "sunflower", "yellow", 23, 26, "summer and fall");
+insert into flower_shop values (7, "marigold", "yellow", 29, 23, "early summer to frost in late fall");
+insert into flower_shop values (8, "primrose", "yellow", 28, 43, "late winter to late spring");
+insert into flower_shop values (9, "bluebell", "blue", 20, 31, "spring");
+insert into flower_shop values (10, "hydrangea", "blue", 13, 26, "spring to early fall");
+insert into flower_shop values (11, "lilac", "purple", 42, 49, "late spring to early summer");
+insert into flower_shop values (12, "pansy", "purple", 18, 40, "spring to fall");
+insert into flower_shop values (13, "morning glory", "purple", 38, 36, "early summer to first frost of fall");
+insert into flower_shop values (14, "jasmine", "white", 48, 30, "spring to late fall");
+insert into flower_shop values (15, "daisy", "white", 31, 39, "spring to fall");
+
+select * from flower_shop order by price;
+
+select flower, (quantity*price) from flower_shop
