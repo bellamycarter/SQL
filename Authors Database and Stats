@@ -1,0 +1,86 @@
+create table authors (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+fullname TEXT,
+age INTEGER,
+alma_mater TEXT,
+best_sellers INTEGER);
+    
+insert into authors (fullname, age, alma_mater, best_sellers) values ("Madeline Miller", 44, "Brown University", 1);
+
+insert into authors (fullname, age, alma_mater, best_sellers) values ("Donna Tartt", 59, "Bennington College", 2);
+
+insert into authors (fullname, age, alma_mater, best_sellers) values ("Sarah J Maas", 37, "Hamilton College", 3);
+
+insert into authors (fullname, age, alma_mater, best_sellers) values ("Khaled Hosseini", 58, "Santa Clara University", 4);
+
+insert into authors (fullname, age, alma_mater, best_sellers) values ("James Patterson", 76, "Venderbilt University", 5);
+
+insert into authors (fullname, age, alma_mater, best_sellers) values ("Leigh Bardugo", 48, "Yale University", 6);
+
+insert into authors (fullname, age, alma_mater, best_sellers) values ("Cassandra Clare", 49, "N/A", 7);
+
+insert into authors (fullname, age, alma_mater, best_sellers) values ("Michael Connelly", 66, "University of Florida", 8);
+
+insert into authors (fullname, age, alma_mater, best_sellers) values ("John Grisham", 68, "University of Mississippi", 9);
+
+insert into authors (fullname, age, alma_mater, best_sellers) values ("John Green", 45, "Kenyon College", 10);
+
+insert into authors (fullname, age, alma_mater, best_sellers) values ("Delia Owens", 74, "University of Georgia", 11);
+
+insert into authors (fullname, age, alma_mater, best_sellers) values ("Markus Zusak", 47, "University of New South Wales", 12);
+
+insert into authors (fullname, age, alma_mater, best_sellers) values ("Kathryn Stockett", 54, "University of Alabama", 13);
+
+insert into authors (fullname, age, alma_mater, best_sellers) values ("Suzanne Collins", 60, "New York University", 14);
+
+insert into authors (fullname, age, alma_mater, best_sellers) values ("Renee Ahdieh", 39, "Univeristy of North Carolina", 15); 
+
+create table best_sellers (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+best_selling_books TEXT,
+film_adaption TEXT,
+adaption_type TEXT);
+
+insert into best_sellers (best_selling_books, film_adaption, adaption_type) values ("The Song of Achilles", "Circe", "in progress");
+
+insert into best_sellers (best_selling_books, film_adaption, adaption_type) values ("The Goldfinch", "The Goldfinch", "film");
+
+insert into best_sellers (best_selling_books, film_adaption, adaption_type) values ("A Court of Thorns and Roses", "Throne of Glass", "in progress");
+
+insert into best_sellers (best_selling_books, film_adaption, adaption_type) values ("The Kite Runner", "The Kite Runner", "film");
+
+insert into best_sellers (best_selling_books, film_adaption, adaption_type) values ("Michael Bennett series", "Alex Cross", "film");
+
+insert into best_sellers (best_selling_books, film_adaption, adaption_type) values ("Six of Crows duology", "Shadow and Bone", "tv series");
+
+insert into best_sellers (best_selling_books, film_adaption, adaption_type) values ("The Mortal Instruments series", "Shadowhunters", "tv series");
+
+insert into best_sellers (best_selling_books, film_adaption, adaption_type) values ("Harry Bosch series", "Bosch", "tv series");
+
+insert into best_sellers (best_selling_books, film_adaption, adaption_type) values ("The Firm", "The Pelican Brief", "film");
+
+insert into best_sellers (best_selling_books, film_adaption, adaption_type) values ("Looking for Alaska", "The Fault in Our Stars", "film");
+
+insert into best_sellers (best_selling_books, film_adaption, adaption_type) values ("Where the Crawdads Sing", "Where the Crawdads Sing", "film");
+
+insert into best_sellers (best_selling_books, film_adaption, adaption_type) values ("The Book Thief", "The Book Thief", "film");
+
+insert into best_sellers (best_selling_books, film_adaption, adaption_type) values ("The Help", "The Help", "film");
+
+insert into best_sellers (best_selling_books, film_adaption, adaption_type) values ("The Hunger Games series", "The Hunger Games", "film");
+
+insert into best_sellers (best_selling_books, film_adaption, adaption_type) values ("The Wrath and The Dawn", "The Wrath and The Dawn", "in progress");
+
+select authors.fullname, best_sellers.best_selling_books from authors
+    join best_sellers
+    on authors.best_sellers = best_sellers.id;
+    
+select authors.fullname, best_sellers.film_adaption, best_sellers.adaption_type from authors
+    join best_sellers
+    on authors.best_sellers = best_sellers.id 
+    where adaption_type = "in progress";
+    
+select authors.fullname, authors.age, authors.alma_mater, best_sellers.best_selling_books from authors
+    join best_sellers
+    on authors.best_sellers = best_sellers.id 
+    where age < 50;
