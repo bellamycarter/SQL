@@ -1,0 +1,40 @@
+create table favorite_books
+    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT,
+    author TEXT,
+    year_published INTEGER,
+    series_name TEXT);
+    
+insert into favorite_books (title, author, year_published, series_name) values ("A Court of Mist and Fury", "Sarah J Maas", 2016, "A Court of Thorns and Roses");
+
+insert into favorite_books (title, author, year_published, series_name) values ("Six of Crows", "Leah Bardugo", 2015, "Six of Crows");
+
+insert into favorite_books (title, author, year_published, series_name) values ("House of Earth and Blood", "Sarah J Maas", 2020, "Crescent City");
+
+insert into favorite_books (title, author, year_published, series_name) values ("We Were Liars", "E. Lockhart" , 2014, "stand alone book");
+
+insert into favorite_books (title, author, year_published, series_name) values ("Kingdom of Ash", "Sarah J Maas", 2018, "Throne of Glass");
+
+select * from favorite_books;
+
+update favorite_books set author = "Leigh Bardugo" where id = 2;
+
+select * from favorite_books;
+
+delete from favorite_books where id = 4;
+
+select * from favorite_books;
+
+alter table favorite_books add rating TEXT default "unknown";
+
+select * from favorite_books;
+
+update favorite_books set rating = "4/5" where id = 1;
+
+update favorite_books set rating = "3/5" where id = 2;
+
+update favorite_books set rating = "5/5" where id = 3;
+
+update favorite_books set rating = "5/5" where id = 5;
+
+select * from favorite_books;
