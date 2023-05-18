@@ -1,0 +1,105 @@
+#1 Show the Employees who are Sales Agents.
+select employees.FirstName, 
+employees.LastName,
+employees.Title from chinook.employees
+where Title = 'Sales Support Agent';
+
+#2 Find the Invoices of customers who are from Brazil.
+select cust.FirstName,
+cust.LastName,
+inv.InvoiceId,
+inv.InvoiceDate,
+BillingCountry from chinook.invoices inv
+left join chinook.customers cust
+on inv.CustomerId = cust.CustomerID
+where BillingCountry = 'Brazil';
+
+#3 Show the Invoice Total, Customer name, Country, and Sales Agent name for all invoices and customers.
+select emp.FirstName, 
+emp.Lastname, 
+cust.FirstName, 
+cust.LastName, 
+cust.Country, 
+inv.total from chinook.employees emp 
+join chinook.Customers cust on cust.SupportRepId = emp.EmployeeId
+join chinook.Invoices inv on inv.CustomerId = cust.CustomerId;
+
+#4 What are the total sales for 2009?
+select sum(total) from chinook.invoices
+where InvoiceDate like '%2009%';
+
+#5 Which sales agent made the most dollars in sales in 2009?
+select emp.FirstName, 
+emp.LastName,
+round(sum(inv.Total), 2) as 'Total Sales' from chinook.employees emp
+join chinook.customers cust 
+on cust.SupportRepId = emp.EmployeeId
+join chinook.Invoices inv 
+on inv.CustomerId = cust.CustomerId
+where emp.Title = 'Sales Support Agent' 
+and inv.InvoiceDate like '%2009%' 
+group by emp.FirstName
+order by (round(sum(inv.Total), 2)) desc 
+limit 1;
+
+#6 Provide a query that shows all the Tracks, and include the Album name, Media type, and Genre.
+select tra.Name as 'track title',
+alb.Title as 'album title',
+med.Name as 'media type',
+gen.Name as 'genre' 
+from chinook.tracks tra
+join chinook.media_types med
+on med.MediaTypeId = tra.MediaTypeId
+join chinook.genres gen
+on gen.GenreId = tra.GenreId
+join chinook.albums alb
+on alb.AlbumId = tra.AlbumId;
+
+#7 Which customers are "Top 10" based on money spent?
+select cust.FirstName,
+cust.LastName,
+round(sum(inv.total), 2) as 'Total Spent' from chinook.customers cust
+join chinook.invoices inv
+on inv.CustomerId = cust.CustomerId
+group by cust.FirstName
+order by (round(sum(inv.Total), 2)) desc
+limit 10;
+
+#8 What tracks are in what playlists?
+select t.Name as 'Track',
+p.Name as 'Playlist' 
+from chinook.playlist_track pt
+join chinook.playlists p
+on pt.PlaylistId = p.PlaylistId
+join chinook.tracks t
+on pt.TrackId = t.TrackId
+group by Track;
+
+#9 How many customers spent more than $45?
+select c.FirstName,
+c.LastName,
+i.BillingCountry,
+count(i.CustomerId) as 'Orders',
+sum(i.Total) as 'TotalSpent' 
+from chinook.invoices i
+join chinook.customers c
+on c.CustomerId = i.CustomerId
+group by c.FirstName
+having TotalSpent > 45;
+
+#10 What employees are "Exceptional", "Average", and "Below Average" based on their sales?
+select e.FirstName,
+e.LastName,
+round(avg(i.Total),1) as 'avg_total',
+case 
+when avg(i.Total) > 5.7 then "Exceptional"
+when avg(i.Total) < 5.6 then "Below Average"
+else "Average"
+end as "Employee Performance"
+from chinook.invoices i
+join chinook.customers c
+on i.CustomerId = c.CustomerId
+join chinook.employees e
+on c.SupportRepId = e.EmployeeId
+group by e.FirstName
+order by avg_total desc;
